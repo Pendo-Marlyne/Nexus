@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import type { ReactNode } from 'react'
+import { Navigate } from 'react-router-dom'
 import type { UserRole } from '../../types/user'
 import { useAuthStore } from '../../lib/store/useAuthStore'
 import { Skeleton } from '../ui/skeleton'
@@ -20,23 +20,7 @@ export function ProtectedRoute({
   requiredRoles = [],
   redirectTo = '/auth/login',
 }: ProtectedRouteProps) {
-  const { initAuthListener, initializing, userProfile, hasRole } = useAuthStore((state) => state)
-
-  useEffect(() => {
-    const unsubscribe = initAuthListener()
-    return unsubscribe
-  }, [initAuthListener])
-
-  useEffect(() => {
-    if (initializing) return
-    if (!userProfile) {
-      window.location.href = redirectTo
-      return
-    }
-    if (requiredRoles.length > 0 && !hasRole(requiredRoles)) {
-      window.location.href = '/dashboard'
-    }
-  }, [initializing, userProfile, requiredRoles, hasRole, redirectTo])
+  const { initializing, userProfile, hasRole } = useAuthStore((state) => state)
 
   if (initializing) {
     return (
@@ -48,8 +32,8 @@ export function ProtectedRoute({
     )
   }
 
-  if (!userProfile) return null
-  if (requiredRoles.length > 0 && !hasRole(requiredRoles)) return null
+  if (!userProfile) return <Navigate to={redirectTo} replace />
+  if (requiredRoles.length > 0 && !hasRole(requiredRoles)) return <Navigate to="/dashboard" replace />
   return <>{children}</>
 }
 

@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import { auth } from '../../../../lib/firebase/client'
-import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card'
-import { Button } from '../../../../components/ui/button'
-import { Input } from '../../../../components/ui/input'
-import { Label } from '../../../../components/ui/label'
+import { auth } from '../../lib/firebase/client'
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card'
+import { Button } from '../../components/ui/button'
+import { Input } from '../../components/ui/input'
+import { Label } from '../../components/ui/label'
 
 const resetSchema = z.object({
   email: z.string().email('Enter a valid email address'),

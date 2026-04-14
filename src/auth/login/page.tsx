@@ -4,12 +4,12 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAuthStore } from '../../../../lib/store/useAuthStore'
-import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card'
-import { Button } from '../../../../components/ui/button'
-import { Input } from '../../../../components/ui/input'
-import { Label } from '../../../../components/ui/label'
-import { Skeleton } from '../../../../components/ui/skeleton'
+import { useAuthStore } from '../../lib/store/useAuthStore'
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card'
+import { Button } from '../../components/ui/button'
+import { Input } from '../../components/ui/input'
+import { Label } from '../../components/ui/label'
+import { Skeleton } from '../../components/ui/skeleton'
 
 const loginSchema = z.object({
   email: z.string().email('Enter a valid email address'),
