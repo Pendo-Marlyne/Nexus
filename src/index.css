@@ -1,4 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+  --background: 222 47% 8%;
+  --foreground: 210 40% 96%;
+  --card: 222 40% 11%;
+  --card-foreground: 210 40% 96%;
+  --muted: 215 28% 17%;
+  --muted-foreground: 215 20% 65%;
+  --border: 217 27% 23%;
+  --input: 217 27% 23%;
+  --ring: 263 70% 60%;
+  --radius: 0.75rem;
   --bg: #070a14;
   --panel: #0c1220;
   --panel-soft: #182235;
