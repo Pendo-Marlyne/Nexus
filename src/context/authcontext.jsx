@@ -3,13 +3,15 @@ import { createContext, useContext, useMemo, useState } from 'react'
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({ name: 'Nexus User', email: 'user@nexus.app' })
+  const [user, setUser] = useState(null)
 
   const value = useMemo(
     () => ({
       user,
-      login: (email) => setUser({ name: 'Nexus User', email }),
+      login: (email, name = 'Nexus Friend') => setUser({ name, email }),
+      signup: (email, name) => setUser({ name, email }),
       logout: () => setUser(null),
+      deleteAccount: () => setUser(null),
     }),
     [user],
   )
@@ -22,6 +24,5 @@ export function useAuth() {
   if (!context) {
     throw new Error('useAuth must be used inside AuthProvider')
   }
-
   return context
 }

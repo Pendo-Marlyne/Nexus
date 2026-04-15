@@ -1,17 +1,17 @@
-const SKILLS = [
-  'Lead capture and qualification',
-  'Task tracking and ownership',
-  'AI-powered handoff summaries',
-  'Project health and analytics',
-]
+export default function SkillsSection({ progress }) {
+  const tips = [
+    'Breathe, sip water, and tackle one tiny task first.',
+    'You are not behind. You are building with care.',
+    'Done is lovely. Perfect can wait.',
+  ]
 
-export default function SkillsSection() {
   return (
     <section className="page-card">
-      <h2>Nexus Skills</h2>
+      <h3>Cheerleader Corner ??</h3>
+      <p>You're {progress}% done with this week. Keep sparkling.</p>
       <ul className="skill-list">
-        {SKILLS.map((skill) => (
-          <li key={skill}>{skill}</li>
+        {tips.map((tip) => (
+          <li key={tip}>{tip}</li>
         ))}
       </ul>
     </section>
