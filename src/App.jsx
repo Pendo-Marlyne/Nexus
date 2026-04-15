@@ -1,38 +1,19 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { AISidebar } from './components/dashboard/AISidebar'
 import { HandoffView } from './components/dashboard/HandoffView'
-import { LeadFunnel } from './components/dashboard/LeadFunnel'
+import { LeadFunnel } from './components/leads/LeadFunnel'
 import { TaskBoard } from './components/dashboard/TaskBoard'
 import { TimeTracker } from './components/dashboard/TimeTracker'
 import { VoiceTaskInput } from './components/forms/VoiceTaskInput'
 import { ExportButton } from './components/shared/ExportButton'
 import { Footer } from './components/shared/Footer'
 import { Navbar } from './components/shared/Navbar'
-import { TASK_STATES } from './types/task'
 
 const TABS = ['dashboard', 'projects', 'tasks', 'leads', 'handoffs', 'analytics']
 
-const SAMPLE_TASKS = [
-  { id: 'T-101', title: 'Finalize Acme hero section', state: 'In Progress', assignee: 'Nina' },
-  { id: 'T-102', title: 'Logo revision v2', state: 'Review', assignee: 'Kenny' },
-  { id: 'T-103', title: 'Proposal draft review', state: 'Backlog', assignee: null },
-  { id: 'T-104', title: 'Homepage QA sweep', state: 'Blocked', assignee: 'Rika' },
-]
-
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
-  const [tasks, setTasks] = useState(SAMPLE_TASKS)
-
-  const stats = useMemo(() => {
-    const blocked = tasks.filter((task) => task.state === 'Blocked').length
-    const done = tasks.filter((task) => task.state === 'Done').length
-    return { active: tasks.length, blocked, done }
-  }, [tasks])
-
-  const moveTask = (id, nextState) => {
-    if (!TASK_STATES.includes(nextState)) return
-    setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, state: nextState } : task)))
-  }
+  const stats = { active: 0, blocked: 0, done: 0 }
 
   return (
     <div className="page-wrap">
@@ -88,11 +69,11 @@ function App() {
             <h2>{activeTab}</h2>
             <span>{stats.active} tasks / {stats.blocked} blocked / {stats.done} done</span>
           </div>
-          <ExportButton fileName="nexus-dashboard.json" payload={{ tasks }} />
+          <ExportButton fileName="nexus-dashboard.json" payload={{ activeTab }} />
         </header>
 
         {(activeTab === 'dashboard' || activeTab === 'tasks') && (
-          <TaskBoard tasks={tasks} onMoveTask={moveTask} />
+          <TaskBoard />
         )}
 
         {(activeTab === 'dashboard' || activeTab === 'leads') && <LeadFunnel />}
